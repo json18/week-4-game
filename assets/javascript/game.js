@@ -1,17 +1,7 @@
-// this function somehow gets this whole thing working. Unsure why.
-window.onload = function() {
-  
-// Declaring Variables
 var wins = 0;
 var losses = 0;
-
-// the currentValue variable is the ARRAY that we add the crystal value to
-var currentValue = [];
-
-// sum variable is the SUM of the crystals
-var sum = [];
-
-// variable goalScore chooses a random number between 19 and 120. The randomCrystal variables all choose a random number between 1 and 19.
+var sum = 0;
+// variable goalScore - chooses a random number between 19 and 120. The randomCrystal variables all choose a random number between 1 and 19.
 var goalScore = Math.floor(Math.random()*(120-19+1)+19);
 var randomCrystal1 = Math.floor(Math.random()*(12-1+1)+1);
 var randomCrystal2 = Math.floor(Math.random()*(12-1+1)+1);
@@ -19,71 +9,85 @@ var randomCrystal3 = Math.floor(Math.random()*(12-1+1)+1);
 var randomCrystal4 = Math.floor(Math.random()*(12-1+1)+1);
 
 
-//This allows the Javascript to get input the values into the HTML
-document.getElementById("wins").innerHTML = wins;
-document.getElementById("losses").innerHTML = losses;
-document.getElementById("goalScore").innerHTML = goalScore;
-document.getElementById("currentValue").innerHTML = currentValue;
+$("wins").html(wins);
+$("losses").html(losses);
+$("goalScore").html(goalScore);
+$("currentValue").html(sum);
 
 
+$("crystal1").on("click", sum1);
+    if (goalScore > sum) {
+        sum = sum + randomCrystal1;
+    }
+    else {
+        checkingforWin();
+    }
 
-if (goalScore == sum) {
-    wins++;
+$("crystal2").on("click", sum2);
+    if (goalScore > sum) {
+        sum = sum + randomCrystal2;
+    }
+    else {
+        checkingforWin();
+    }
+$("crystal3").on("click", sum3);
+    if (goalScore > sum) {
+        sum = sum + randomCrystal3;
+    }
+    else {
+        checkingforWin();
+    }
+$("crystal4").on("click", sum4);
+    if (goalScore > sum) {
+        sum = sum + randomCrystal4;
+    }
+    else {
+        checkingforWin();
+    }
+
+    console.log(sum1);
+
+function sum1 () {
+    sum = sum + randomCrystal1
+    }
+    
+function sum2 () {
+    sum = sum + randomCrystal2
+    }
+
+function sum3 () {
+    sum = sum + randomCrystal3
+    }
+
+function sum4 () {
+    sum = sum + randomCrystal4
+    }
+
+
+    
+function checkingforWin () {
+    if (goalScore == sum) {
+        wins++;
+        goalScore = Math.floor(Math.random()*(120-19+1)+19);
+        randomCrystal1 = Math.floor(Math.random()*(12-1+1)+1);
+        randomCrystal2 = Math.floor(Math.random()*(12-1+1)+1);
+        randomCrystal3 = Math.floor(Math.random()*(12-1+1)+1);
+        randomCrystal4 = Math.floor(Math.random()*(12-1+1)+1);
+    }
+    if (goalScore < sum) {
+        losses++;
+        currentValue = [];
+        goalScore = Math.floor(Math.random()*(120-19+1)+19);
+        randomCrystal1 = Math.floor(Math.random()*(12-1+1)+1);
+        randomCrystal2 = Math.floor(Math.random()*(12-1+1)+1);
+        randomCrystal3 = Math.floor(Math.random()*(12-1+1)+1);
+        randomCrystal4 = Math.floor(Math.random()*(12-1+1)+1);
+    }
 }
 
-if (sum > goalScore) {
-    losses++;
-    goalScore = Math.floor(Math.random()*(120-19+1)+19);
-    currentValue = [];
-}
-
-
-//making crystal1 clickable
-document.getElementById("crystal1" ).onclick = function() {
-    console.log("crystal one was clicked");
-    currentValue.push(randomCrystal1);
-    sum = currentValue.reduce(add,0)
-        function add(a,b) {
-            return a + b;
-        }
-    document.getElementById("currentValue").innerHTML = sum;
-}
-
-//making crystal2 clickable
-document.getElementById("crystal2" ).onclick = function() {
-    console.log("crystal two was clicked");
-    currentValue.push(randomCrystal2);
-    sum = currentValue.reduce(add,0)
-        function add(a,b) {
-            return a + b;
-        }
-    document.getElementById("currentValue").innerHTML = sum;
-}
-
-//making crystal3 clickable
-document.getElementById("crystal3" ).onclick = function() {
-    console.log("crystal three was clicked");
-    currentValue.push(randomCrystal3);
-    sum = currentValue.reduce(add,0)
-        function add(a,b) {
-            return a + b;
-        }
-    document.getElementById("currentValue").innerHTML = sum;
-}
-
-//making crystal4 clickable
-document.getElementById("crystal4" ).onclick = function() {
-    console.log("crystal four was clicked");
-    currentValue.push(randomCrystal4);
-    sum = currentValue.reduce(add,0)
-        function add(a,b) {
-            return a + b;
-        }
-    document.getElementById("currentValue").innerHTML = sum;
-}
+    console.log("THIS WORKS");
 
 
 
 
 
-};
